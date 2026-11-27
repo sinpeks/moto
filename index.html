@@ -88,13 +88,13 @@ html.light .mt .gauge{background:rgba(0,0,0,.12)}
 .poster.a{left:20%;transform:rotate(-2deg)}.poster.b{right:20%;transform:rotate(1.5deg)}
 .lamp{position:absolute;left:50%;top:0;width:110px;height:16px;margin-left:-55px;background:#ddd;border-radius:0 0 60px 60px;box-shadow:0 0 30px 8px rgba(255,255,240,.9)}
 .cone{position:absolute;left:50%;top:0;width:70cqw;margin-left:-35cqw;height:86%;background:linear-gradient(rgba(255,252,235,.28),rgba(255,252,235,0));clip-path:polygon(46% 0,54% 0,100% 100%,0 100%);mix-blend-mode:screen;pointer-events:none}
-.floor{position:absolute;left:-30%;right:-30%;bottom:0;height:36%;transform-origin:50% 100%;transform:perspective(500px) rotateX(48deg);background:
+.floor{position:absolute;left:-30%;right:-30%;bottom:0;height:39%;transform-origin:50% 100%;transform:perspective(500px) rotateX(48deg);background:
  linear-gradient(rgba(255,255,255,.0),rgba(255,255,255,.18)),
  repeating-linear-gradient(90deg,transparent 0 118px,rgba(60,52,40,.5) 118px 121px),
  repeating-linear-gradient(0deg,transparent 0 118px,rgba(60,52,40,.5) 118px 121px),
  linear-gradient(#cfc6b4,#e9e2d3)}
 /* pedestal */
-.ped{position:absolute;left:50%;bottom:4cqh;width:min(86cqw,1050px);transform:translateX(-50%);aspect-ratio:1/.3;pointer-events:none}
+.ped{position:absolute;left:50%;bottom:0cqh;width:min(86cqw,1050px);transform:translateX(-50%);aspect-ratio:1/.3;pointer-events:none}
 .ped .rim{position:absolute;left:0;right:0;bottom:0;height:78%;border-radius:50%;background:linear-gradient(#1a1918 0,#3a3835 40%,#0c0c0b 100%);box-shadow:0 30px 50px rgba(0,0,0,.55)}
 .ped .top{position:absolute;left:0;right:0;top:0;height:80%;perspective:1400px}
 .disc{position:absolute;left:0;top:50%;width:100%;aspect-ratio:1;margin-top:-50%;border-radius:50%;transform:rotateX(76.5deg) rotateZ(var(--a,0deg));background:
@@ -102,7 +102,7 @@ html.light .mt .gauge{background:rgba(0,0,0,.12)}
 .disc svg{position:absolute;inset:0;width:100%;height:100%}
 .glow{position:absolute;left:0;right:0;margin:auto;bottom:10cqh;width:min(96cqw,1200px);height:min(70cqh,680px);background:radial-gradient(46% 50% at 50% 58%,#fff 0,#fff 36%,rgba(255,255,255,.7) 56%,rgba(255,255,255,0) 74%);pointer-events:none}
 /* bike */
-.stage{position:absolute;left:0;right:0;margin:auto;bottom:calc(4cqh + min(86cqw,1050px)*.3*.42);width:min(72cqw,820px);height:min(50cqh,520px);cursor:pointer;touch-action:pan-y}
+.stage{position:absolute;left:0;right:0;margin:auto;bottom:calc(0cqh + min(86cqw,1050px)*.3*.42);width:min(72cqw,820px);height:min(50cqh,520px);cursor:pointer;touch-action:pan-y}
 .stage:active{cursor:grabbing}
 .spin{position:absolute;inset:0;transition:transform .45s cubic-bezier(.5,0,.2,1),opacity .45s,filter .45s}
 .spin.outL{transform:translateX(-70cqw) skewX(18deg);opacity:0;filter:blur(8px)}
@@ -539,6 +539,23 @@ html.pink .wall{background:linear-gradient(180deg,#2a2232 0,#3e3346 45%,#463a4f 
 .tube{z-index:1!important}
 html.pink .model{background:rgba(24,10,30,.72);backdrop-filter:blur(4px);padding:10px 14px 10px;border-radius:12px;box-shadow:0 0 0 1px rgba(255,43,214,.35)}
 html.pink .side .arr{background:rgba(24,10,30,.75);color:#fff;border-color:#fff}
+
+/* ---- 3D pedestal: thick metal drum with neon ring and floor shadow ---- */
+.ped .rim{height:86%!important;background:
+  linear-gradient(90deg,rgba(0,0,0,.55) 0,rgba(0,0,0,0) 18%,rgba(255,255,255,.12) 45%,rgba(0,0,0,0) 70%,rgba(0,0,0,.6) 100%),
+  linear-gradient(180deg,#2b2d30 0,#4a4d52 30%,#1c1e20 62%,#0d0e0f 100%)!important;
+  box-shadow:0 40px 60px rgba(0,0,0,.65),inset 0 -6px 10px rgba(0,0,0,.6)!important}
+.ped .rim::before{content:"";position:absolute;left:-4%;right:-4%;bottom:-14%;height:46%;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.6),transparent);z-index:-1}
+.ped .rim::after{content:"";position:absolute;left:.6%;right:.6%;top:30%;height:14%;border-radius:50%;border-bottom:4px solid var(--neonc);filter:drop-shadow(0 0 6px var(--neonc)) drop-shadow(0 0 14px var(--neonc));opacity:.9}
+.disc{box-shadow:0 0 0 6px #8b8a86,0 0 0 9px #2a2b2d}
+/* ---- landing theme-switch animation ---- */
+#landing.flip .topLogo img{animation:tubeflick .9s steps(1) 1}
+#landing.flip .bd{animation:bdswap .9s ease-out 1}
+@keyframes bdswap{0%{filter:brightness(2.4) saturate(0) blur(6px)}35%{filter:brightness(1.6) saturate(.6) blur(2px)}100%{}}
+.lsplash{position:absolute;inset:0;pointer-events:none;z-index:2;overflow:hidden}
+.lsplash i{position:absolute;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--neonc) 75%,transparent) 0,color-mix(in srgb,var(--neonc) 35%,transparent) 40%,transparent 70%);mix-blend-mode:screen;filter:blur(6px);opacity:0;animation:splat .9s ease-out forwards}
+.lsplash b{position:absolute;top:0;bottom:0;width:30%;background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--neonc) 70%,transparent),transparent);mix-blend-mode:screen;animation:wipe .8s ease-in-out forwards}
+@keyframes wipe{from{left:-35%}to{left:105%}}
 /* menu */
 /* ---- collapsible menu on phones ---- */
 .menuBtn,.mcat{display:none}
@@ -630,6 +647,7 @@ html.light .menuBtn{border-color:#b9bcc0}
 <!-- ========== LANDING: roll-up door ========== -->
 <div id="app">
 <section id="landing" aria-label="Почетна">
+ <div class="lsplash" id="lsplash"></div>
  <div class="bd l" aria-hidden="true"></div><div class="bd r" aria-hidden="true"></div>
  <div class="topbar"><button class="thm" id="thm0" aria-label="Режим"><span class="sw" aria-hidden="true"><span class="knob"></span><b class="m">♂</b><b class="f">♀</b></span></button><div class="lang" role="group" aria-label="Јазик"><button data-l="mk" class="on">MK</button><button data-l="en">EN</button></div></div>
  <div class="facade">
@@ -1035,7 +1053,11 @@ document.addEventListener("keydown",e=>{
 
 // theme (shared key with the Sinpeks catalog; light by default)
 function themeUI(){const pk=document.documentElement.classList.contains("pink");["thm","thm0"].forEach(id=>{const b=$(id);if(b){b.title=pk?T[L].ngreen:T[L].npink;b.setAttribute("aria-label",b.title);b.setAttribute("aria-pressed",pk);}});const m=document.querySelector('meta[name="theme-color"]');if(m)m.content=pk?"#2a0f24":"#13200d";}
-function themeFx(){const g=$("garage");if(!g.classList.contains("on"))return;g.classList.remove("flip");void g.offsetWidth;g.classList.add("flip");setTimeout(()=>g.classList.remove("flip"),1000);
+function themeFx(){const g=$("garage");
+ if(!g.classList.contains("on")){const l=$("landing"),sp=$("lsplash");l.classList.remove("flip");void l.offsetWidth;l.classList.add("flip");setTimeout(()=>l.classList.remove("flip"),1000);
+  sp.innerHTML="<b></b>";for(let i=0;i<10;i++){const b=document.createElement("i");const r=8+Math.random()*22;Object.assign(b.style,{width:r+"%",height:(r*1.6)+"%",left:(Math.random()<.5?Math.random()*35:60+Math.random()*35)+"%",top:(Math.random()*80)+"%",animationDelay:(i*.04)+"s"});sp.appendChild(b);}
+  setTimeout(()=>sp.innerHTML="",1300);const out=S();if(out){const T0=ac.currentTime,n=noise(.6),f=ac.createBiquadFilter(),gg=ac.createGain();f.type="highpass";f.frequency.value=2500;gg.gain.setValueAtTime(.35,T0);gg.gain.exponentialRampToValueAtTime(.001,T0+.55);n.connect(f).connect(gg).connect(out);n.start(T0);}
+  return;}g.classList.remove("flip");void g.offsetWidth;g.classList.add("flip");setTimeout(()=>g.classList.remove("flip"),1000);
  const sp=$("splash");sp.innerHTML="";for(let i=0;i<9;i++){const b=document.createElement("i");const r=20+Math.random()*45;Object.assign(b.style,{width:r+"%",height:r+"%",left:(Math.random()*80)+"%",top:(Math.random()*70)+"%",animationDelay:(i*.05)+"s"});sp.appendChild(b);}
  setTimeout(()=>sp.innerHTML="",1300);
  const out=S();if(out){const T0=ac.currentTime,n=noise(.6),f=ac.createBiquadFilter(),gg=ac.createGain();f.type="highpass";f.frequency.value=2500;gg.gain.setValueAtTime(.35,T0);gg.gain.exponentialRampToValueAtTime(.001,T0+.55);n.connect(f).connect(gg).connect(out);n.start(T0);}}
