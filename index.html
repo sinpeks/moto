@@ -1007,7 +1007,7 @@ const appEl=$("app");
 function fitApp(){
  const w=innerWidth,h=innerHeight,touch=matchMedia("(pointer:coarse)").matches;
  if(touch){DW=w;DH=h;ZF=1;}                                  // phones/tablets: native size, pinch-zoom is visual only
- else{DW=w/h<1?900:1440;DH=Math.round(DW*h/w);ZF=DW/w;}    // desktop: layout always on a 1440-wide stage
+ else{DW=w/h<1?1125:1800;DH=Math.round(DW*h/w);ZF=DW/w;}    // desktop: layout always on a 1440-wide stage
  appEl.style.setProperty("--aw",DW+"px");appEl.style.setProperty("--ah",DH+"px");appEl.style.setProperty("--as",1/ZF);}
 const AW=()=>DW,AH=()=>DH;
 fitApp();
