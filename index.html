@@ -456,7 +456,7 @@ html.pink .tube{background:#fff0fb}
 .neon{display:none}
 html.light #garage .wall{filter:none}
 /* graffiti on the new walls */
-.gA{left:7%!important;top:54.5%!important;width:14.5%!important;transform:perspective(500px) rotateY(32deg);transform-origin:left center}
+.gA{left:1.2%!important;top:63%!important;width:14.5%!important;transform:perspective(500px) rotateY(32deg);transform-origin:left center}
 .gB{right:1.2%!important;top:47%!important;width:14.5%!important;transform:perspective(500px) rotateY(-32deg);transform-origin:right center}
 .gC{right:4%!important;top:24%!important;width:8%!important;transform:perspective(500px) rotateY(-32deg)}
 .gD{left:50%!important;top:27.5%!important;width:12%!important;transform:translateX(-50%)!important;opacity:.9!important;mix-blend-mode:normal!important}
@@ -475,16 +475,6 @@ html:not(.pink) .bd.l,html.pink .bd.r{filter:brightness(1.08) saturate(1.15) dro
 @media (max-height:520px) and (min-width:601px){.topLogo img{height:44px}.doorTitle{font-size:40px}}
 .props::after{content:""}
 .ped,.glow,.stage{z-index:1}
-.tube{z-index:0!important}.spill{z-index:0}
-.props{z-index:1!important}
-.ped,.glow,.stage{z-index:2!important}
-.grafs{z-index:1}
-#garage{--wt:max(25.5%,232px);--mh:clamp(110px,24vh,230px)}
-@media (max-width:600px){#garage{--wt:25.5%;--mh:clamp(90px,17vh,150px)}}
-.tube.t1,.tube.t2{top:var(--wt)!important}
-.tube.v1,.tube.v2{top:calc(var(--wt) + 14px)!important}
-.wmap{position:absolute;left:50%;top:calc(var(--wt) + 26px);height:var(--mh);width:auto;transform:translateX(-50%) rotate(-1deg);z-index:1;pointer-events:none;overflow:visible}
-.gD{top:calc(var(--wt) + 34px + var(--mh))!important}
 /* menu */
 /* ---- collapsible menu on phones ---- */
 .menuBtn,.mcat{display:none}
@@ -607,7 +597,12 @@ html.light .menuBtn{border-color:#b9bcc0}
 
  <div class="sw-l"></div><div class="sw-r"></div>
  <div class="ceil"></div>
- <svg class="wmap" viewBox="0 0 336 240" aria-hidden="true"><g transform="translate(4 4)">
+ <div class="tube t1"></div><div class="tube t2"></div><div class="tube v1"></div><div class="tube v2"></div>
+ <svg class="props" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+  <defs><linearGradient id="pm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a5664"/><stop offset="1" stop-color="#22343d"/></linearGradient>
+  <linearGradient id="rd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c8323c"/><stop offset="1" stop-color="#7d1820"/></linearGradient></defs>
+  <!-- back-wall door with graffiti -->
+  <g transform="translate(640 330)">
    <g filter="drop-shadow(0 6px 6px rgba(0,0,0,.45))">
     <path d="M0 14 L106 0 L214 16 L320 2 L326 214 L216 228 L108 212 L4 226 Z" fill="#f8f1dc" stroke="#6b5a3e" stroke-width="3" stroke-linejoin="round"/>
     <path d="M106 0 L108 212 M214 16 L216 228" stroke="#c9b993" stroke-width="2"/>
@@ -626,12 +621,7 @@ html.light .menuBtn{border-color:#b9bcc0}
    <g><path d="M72 182c-10-14-16-22-16-30a16 16 0 0 1 32 0c0 8-6 16-16 30z" fill="#e2332a" stroke="#7a1410" stroke-width="2"/><circle cx="72" cy="151" r="6" fill="#fff"/></g>
    <g><path d="M258 122c-10-14-16-22-16-30a16 16 0 0 1 32 0c0 8-6 16-16 30z" fill="#2f6fe0" stroke="#173a80" stroke-width="2"/><circle cx="258" cy="91" r="6" fill="#fff"/></g>
    <circle cx="163" cy="12" r="7" fill="#d9433a" stroke="#7a1410" stroke-width="2"/>
-  </g></svg>
- <div class="tube t1"></div><div class="tube t2"></div><div class="tube v1"></div><div class="tube v2"></div>
- <svg class="props" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
-  <defs><linearGradient id="pm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a5664"/><stop offset="1" stop-color="#22343d"/></linearGradient>
-  <linearGradient id="rd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c8323c"/><stop offset="1" stop-color="#7d1820"/></linearGradient></defs>
-  <!-- back-wall door with graffiti -->
+  </g>
   <!-- left: shelf unit with boxes -->
   <g transform="translate(275 610)" fill="url(#pm)"><rect width="150" height="12"/><rect y="80" width="150" height="12"/><rect y="160" width="150" height="12"/><rect width="10" height="270"/><rect x="140" width="10" height="270"/>
    <rect x="16" y="-44" width="40" height="44" fill="#a9662f"/><rect x="62" y="-30" width="34" height="30" fill="#c98a3c"/><rect x="18" y="40" width="54" height="40" fill="#45626f"/><rect x="82" y="48" width="44" height="32" fill="#b8392f"/><rect x="20" y="118" width="110" height="42" fill="#30474f"/></g>
