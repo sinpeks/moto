@@ -485,6 +485,11 @@ html:not(.pink) .bd.l,html.pink .bd.r{filter:brightness(1.08) saturate(1.15) dro
 .tube.v1,.tube.v2{top:calc(var(--wt) + 14px)!important}
 .wmap{position:absolute;left:50%;top:calc(var(--wt) + 26px);height:var(--mh);width:auto;transform:translateX(-50%) rotate(-1deg);z-index:1;pointer-events:none;overflow:visible}
 .gD{top:calc(var(--wt) + 34px + var(--mh))!important}
+@container app (min-width:901px){
+ .model{max-width:calc(20cqw - 3cqw - 16px)!important}
+ .model h1{font-size:clamp(22px,2.4cqw,36px)!important;line-height:1.05;overflow-wrap:anywhere;hyphens:auto}
+ .model h1.long{font-size:clamp(19px,1.8cqw,27px)!important}
+}
 /* menu */
 /* ---- collapsible menu on phones ---- */
 .menuBtn,.mcat{display:none}
@@ -983,7 +988,7 @@ function sRender(){const q=$("sQ").value;$("sbox").classList.toggle("has",!!q);c
  ov.innerHTML='<div class="sinfo">'+(sRes.length?sRes.length+" "+esc(T[L].sres):esc(T[L].snone)+" „"+esc(q)+"“")+'</div>'+sRes.map((p,i)=>'<div class="sr'+(i===sSel?" sel":"")+'" data-i="'+i+'" role="option"><img alt="" loading="lazy" src="'+SRC(p.imgs[0])+'"><div><b>'+hl(nm(p.name),q)+'</b><small><i class="dot '+(p.stock?"in":"out")+'"></i>'+esc(p.brand)+" · "+esc(T[L].cat[p.cat])+(p.cc&&p.cc!=="–"&&p.cc!=="⚡"?" · "+esc(p.cc):"")+'</small></div><div class="pr">'+esc(fmt(p.price))+'</div></div>').join("");
  ov.classList.add("on");}
 function sPick(i){const p=sRes[i];if(!p)return;if(AW()<=600)menu(false);$("sov").classList.remove("on");$("sQ").blur();
- ci=0;brand="";$("brand").value="";build(false);const k=list.indexOf(p);if(k>=0){mi=k;show(1);}}
+ ci=(p.cat==="helmet"||p.cat==="parts")?CATS.indexOf(p.cat):0;brand="";$("brand").value="";build(false);const k=list.indexOf(p);if(k>=0){mi=k;show(1);}}
 $("sQ").addEventListener("input",()=>{sSel=-1;sRender();});
 $("sQ").addEventListener("focus",()=>{if($("sQ").value.trim())sRender();});
 $("sQ").addEventListener("keydown",e=>{
@@ -996,21 +1001,15 @@ $("sov").addEventListener("click",e=>{const r=e.target.closest(".sr");if(r)sPick
 $("sX").onclick=()=>{$("sQ").value="";sRender();$("sQ").focus();};
 document.addEventListener("pointerdown",e=>{if(!e.target.closest("#sbox"))$("sov").classList.remove("on");});
 
-// ---------- keep the same look at any browser zoom ----------
-const ZL=[.25,.33,.5,.67,.75,.8,.9,1,1.1,1.25,1.5,1.75,2,2.5,3,4,5];
-let ZF=1;
-function snapZ(r,tol){let best=1,d=9;for(const z of ZL){const e=Math.abs(r-z)/z;if(e<d){d=e;best=z;}}return d<tol?best:null;}
-function zoomF(){if(matchMedia("(pointer:coarse)").matches)return 1;
- const dpr=devicePixelRatio||1,key="smz-base";
- const z1=snapZ(outerWidth/innerWidth,.06);let base=null;try{base=+localStorage.getItem(key)||null}catch(e){}
- const z2=base?snapZ(dpr/base,.04):null;
- let z=z2!==null?z2:(z1!==null?z1:1);
- if(z2===1&&z1!==null&&z1!==1&&Math.abs(dpr-base)<.01)z=z1;          // Safari: pixel ratio does not change with zoom
- if(!base||z2===null){try{localStorage.setItem(key,String(dpr/z))}catch(e){}}
- return z;}
+// ---------- same look at any browser zoom: fixed design width, scaled to the window ----------
+let ZF=1,DW=0,DH=0;
 const appEl=$("app");
-function fitApp(){ZF=zoomF();appEl.style.setProperty("--aw",(innerWidth*ZF)+"px");appEl.style.setProperty("--ah",(innerHeight*ZF)+"px");appEl.style.setProperty("--as",1/ZF);}
-const AW=()=>innerWidth*ZF,AH=()=>innerHeight*ZF;
+function fitApp(){
+ const w=innerWidth,h=innerHeight,touch=matchMedia("(pointer:coarse)").matches;
+ if(touch){DW=w;DH=h;ZF=1;}                                  // phones/tablets: native size, pinch-zoom is visual only
+ else{DW=w/h<1?900:1440;DH=Math.round(DW*h/w);ZF=DW/w;}    // desktop: layout always on a 1440-wide stage
+ appEl.style.setProperty("--aw",DW+"px");appEl.style.setProperty("--ah",DH+"px");appEl.style.setProperty("--as",1/ZF);}
+const AW=()=>DW,AH=()=>DH;
 fitApp();
 // ---------- phone menu: hamburger / swipe down from the top ----------
 const panel=document.querySelector(".panel"),garageEl=$("garage");let closedPB=0;
