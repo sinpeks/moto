@@ -550,8 +550,8 @@ html.pink .wall{background:linear-gradient(180deg,#2a2232 0,#3e3346 45%,#463a4f 
 .smoke i,html:not(.light) .smoke i{background:radial-gradient(circle,color-mix(in srgb,var(--neonc) 40%,transparent) 0,color-mix(in srgb,var(--neonc) 28%,transparent) 30%,color-mix(in srgb,var(--neonc) 10%,transparent) 52%,transparent 70%)!important;filter:blur(5px)!important;will-change:transform,opacity;animation-name:npuff!important}
 @keyframes npuff{0%{opacity:0;transform:translate(0,10px) scale(.3)}10%{opacity:1}22%{opacity:.55}32%{opacity:1}60%{opacity:.75}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(var(--s))}}
 .spark i{background:none!important;clip-path:none!important;filter:drop-shadow(0 0 5px var(--neonc)) drop-shadow(0 0 14px var(--neonc))!important;animation-name:ntwinkle!important}
-.spark i::before{content:"";position:absolute;inset:0;background:#fff;clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%)}
-.spark i::after{content:"";position:absolute;inset:30%;border-radius:50%;background:var(--neonc)}
+.spark i::before{content:"";position:absolute;inset:0;background:#fff;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 0 C53 35 65 47 100 50 C65 53 53 65 50 100 C47 65 35 53 0 50 C35 47 47 35 50 0Z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 0 C53 35 65 47 100 50 C65 53 53 65 50 100 C47 65 35 53 0 50 C35 47 47 35 50 0Z'/%3E%3C/svg%3E") center/contain no-repeat}
+.spark i::after{content:none}
 @keyframes ntwinkle{0%{opacity:0;transform:scale(.1) rotate(0)}20%{opacity:1;transform:scale(1.15) rotate(30deg)}30%{opacity:.3}40%{opacity:1}60%{opacity:.9;transform:scale(.9) rotate(70deg)}100%{opacity:0;transform:scale(.2) rotate(120deg)}}
 
 html:not(.pink) .wmap::after{background:
@@ -765,8 +765,27 @@ html.light .menuBtn{border-color:#b9bcc0}
   <defs><linearGradient id="pm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a5664"/><stop offset="1" stop-color="#22343d"/></linearGradient>
   <linearGradient id="rd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c8323c"/><stop offset="1" stop-color="#7d1820"/></linearGradient></defs>
   <!-- back-wall door with graffiti -->
-  <!-- left: workbench + tool board -->
-  <g transform="translate(150 734)"><rect x="-40" y="0" width="230" height="16" fill="#5a3b28"/><rect x="-30" y="16" width="12" height="130" fill="#2b3b43"/><rect x="168" y="16" width="12" height="130" fill="#2b3b43"/><rect x="-20" y="70" width="190" height="10" fill="#2b3b43"/></g>
+  <!-- left: open tipped toolbox with spilled tools -->
+  <g transform="translate(150 770) scale(.5)">
+   <!-- open lid leaning back -->
+   <path d="M20 70 L0 0 L210 -6 L235 64 Z" fill="#9b2028" stroke="#5c1116" stroke-width="4"/>
+   <path d="M30 56 L16 10 L200 6 L218 52 Z" fill="#7d1820"/>
+   <!-- box body tipped -->
+   <g transform="rotate(8 120 110)">
+    <rect x="15" y="62" width="230" height="96" rx="8" fill="url(#rd)" stroke="#5c1116" stroke-width="4"/>
+    <rect x="15" y="62" width="230" height="16" fill="#c8323c"/>
+    <rect x="30" y="100" width="200" height="6" rx="3" fill="#5c1116"/>
+    <rect x="110" y="118" width="40" height="18" rx="3" fill="#d9d9d9" stroke="#5c1116" stroke-width="3"/>
+    <!-- tools sticking out of the box -->
+    <rect x="60" y="34" width="10" height="40" rx="3" fill="#7a4a2a"/><rect x="48" y="26" width="34" height="14" rx="3" fill="#5f6b70"/>
+    <rect x="150" y="40" width="9" height="34" fill="#c8d0d4"/><rect x="146" y="30" width="17" height="14" rx="5" fill="#e3c21c"/>
+   </g>
+   <!-- spilled tools on floor -->
+   <g transform="translate(270 160) rotate(12)"><rect x="0" y="-6" width="100" height="12" rx="6" fill="#b9c3c8"/><circle cx="0" cy="0" r="16" fill="#b9c3c8"/><circle cx="0" cy="0" r="7" fill="#1b252a"/><path d="M100 -14 a16 16 0 1 1 0 28 l-9 -8 v-12 z" fill="#b9c3c8"/></g>
+   <g transform="translate(240 192) rotate(-6)"><rect x="0" y="-9" width="46" height="18" rx="7" fill="#e3c21c"/><rect x="46" y="-3" width="66" height="6" fill="#c8d0d4"/></g>
+   <g transform="translate(-30 180) rotate(-12)"><rect x="0" y="-5" width="104" height="10" rx="4" fill="#7a4a2a"/><rect x="96" y="-19" width="20" height="38" rx="3" fill="#5f6b70"/></g>
+   <g fill="#8a969b"><circle cx="390" cy="176" r="6"/><circle cx="410" cy="186" r="5"/><circle cx="236" cy="172" r="5"/><rect x="370" y="196" width="12" height="7" rx="2"/></g>
+  </g>
   <!-- right: red tool chest -->
   <g transform="translate(1458 659) scale(.85)"><rect width="150" height="260" rx="6" fill="url(#rd)"/><g fill="#5c1116"><rect x="10" y="20" width="130" height="34" rx="3"/><rect x="10" y="64" width="130" height="34" rx="3"/><rect x="10" y="108" width="130" height="34" rx="3"/><rect x="10" y="152" width="130" height="44" rx="3"/><rect x="10" y="206" width="130" height="44" rx="3"/></g>
    <g fill="#e6e6e6"><rect x="55" y="34" width="40" height="5" rx="2"/><rect x="55" y="78" width="40" height="5" rx="2"/><rect x="55" y="122" width="40" height="5" rx="2"/><rect x="55" y="170" width="40" height="5" rx="2"/><rect x="55" y="224" width="40" height="5" rx="2"/></g>
@@ -1114,7 +1133,7 @@ document.addEventListener("keydown",e=>{
 function themeUI(){const pk=document.documentElement.classList.contains("pink");["thm","thm0"].forEach(id=>{const b=$(id);if(b){b.title=pk?T[L].ngreen:T[L].npink;b.setAttribute("aria-label",b.title);b.setAttribute("aria-pressed",pk);}});const m=document.querySelector('meta[name="theme-color"]');if(m)m.content=pk?"#2a0f24":"#13200d";}
 function themeFx(){const g=$("garage");
  if(!g.classList.contains("on")){const l=$("landing"),sp=$("lsplash");l.classList.remove("flip");void l.offsetWidth;l.classList.add("flip");setTimeout(()=>l.classList.remove("flip"),1000);
-  sp.innerHTML="<b></b>";for(let i=0;i<10;i++){const b=document.createElement("i");const r=8+Math.random()*22;Object.assign(b.style,{width:r+"%",height:(r*1.6)+"%",left:(Math.random()<.5?Math.random()*35:60+Math.random()*35)+"%",top:(Math.random()*80)+"%",animationDelay:(i*.04)+"s"});sp.appendChild(b);}
+  sp.innerHTML="";for(let i=0;i<10;i++){const b=document.createElement("i");const r=8+Math.random()*22;Object.assign(b.style,{width:r+"%",height:(r*1.6)+"%",left:(Math.random()<.5?Math.random()*35:60+Math.random()*35)+"%",top:(Math.random()*80)+"%",animationDelay:(i*.04)+"s"});sp.appendChild(b);}
   setTimeout(()=>sp.innerHTML="",1300);const out=S();if(out){const T0=ac.currentTime,n=noise(.6),f=ac.createBiquadFilter(),gg=ac.createGain();f.type="highpass";f.frequency.value=2500;gg.gain.setValueAtTime(.35,T0);gg.gain.exponentialRampToValueAtTime(.001,T0+.55);n.connect(f).connect(gg).connect(out);n.start(T0);}
   return;}g.classList.remove("flip");void g.offsetWidth;g.classList.add("flip");setTimeout(()=>g.classList.remove("flip"),1000);
  const sp=$("splash");sp.innerHTML="";for(let i=0;i<9;i++){const b=document.createElement("i");const r=20+Math.random()*45;Object.assign(b.style,{width:r+"%",height:r+"%",left:(Math.random()*80)+"%",top:(Math.random()*70)+"%",animationDelay:(i*.05)+"s"});sp.appendChild(b);}
